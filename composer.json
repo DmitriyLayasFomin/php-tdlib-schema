@@ -1,5 +1,5 @@
 {
-    "name": "aurimasniekis/tdlib-schema",
+    "name": "layas/tdlib-schema",
     "type": "library",
     "description": "A TdLib PHP Schema with generator for generating PHP objects from td_api.tl file",
     "keywords": [
