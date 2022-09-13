@@ -18,37 +18,39 @@ class ChatPhoto extends TdObject
     /**
      * A small (160x160) chat photo. The file can be downloaded only before the photo is changed.
      *
-     * @var File
+     * @var File|null
      */
-    protected File $small;
+    protected File|null $small;
 
     /**
      * A big (640x640) chat photo. The file can be downloaded only before the photo is changed.
      *
      * @var File
      */
-    protected File $big;
+    protected File|null $big;
 
-    public function __construct(File $small, File $big)
+    public function __construct(File|null $small, File|null $big)
     {
         $this->small = $small;
-        $this->big   = $big;
+        $this->big = $big;
     }
 
-    public static function fromArray(array $array): ChatPhoto
+    public static function fromArray(array|null $array): ChatPhoto|null
     {
-        return new static(
-            TdSchemaRegistry::fromArray($array['small']),
-            TdSchemaRegistry::fromArray($array['big']),
-        );
+        if (!empty(@$array['small']) || !empty(@$array['big']))
+            return new static(
+                TdSchemaRegistry::fromArray($array['small']),
+                TdSchemaRegistry::fromArray($array['big']),
+            );
+        else return new static(null, null);
     }
 
     public function typeSerialize(): array
     {
         return [
             '@type' => static::TYPE_NAME,
-            'small' => $this->small->typeSerialize(),
-            'big'   => $this->big->typeSerialize(),
+            'small' => !empty($this->small) ? $this->small->typeSerialize() : $this->small,
+            'big' => !empty($this->big) ? $this->big->typeSerialize() : $this->big,
         ];
     }
 

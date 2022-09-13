@@ -43,30 +43,23 @@ class ChatMember extends TdObject
      */
     protected ChatMemberStatus $status;
 
-    /**
-     * If the user is a bot, information about the bot; may be null. Can be null even for a bot if the bot is not a chat member.
-     *
-     * @var BotInfo|null
-     */
-    protected ?BotInfo $botInfo;
 
-    public function __construct(int $userId, int $inviterUserId, int $joinedChatDate, ChatMemberStatus $status, ?BotInfo $botInfo)
+    public function __construct(int $userId, int $inviterUserId, int $joinedChatDate, ChatMemberStatus $status)
     {
         $this->userId         = $userId;
         $this->inviterUserId  = $inviterUserId;
         $this->joinedChatDate = $joinedChatDate;
         $this->status         = $status;
-        $this->botInfo        = $botInfo;
+
     }
 
     public static function fromArray(array $array): ChatMember
     {
         return new static(
-            $array['user_id'],
+            $array['member_id']['user_id'],
             $array['inviter_user_id'],
             $array['joined_chat_date'],
             TdSchemaRegistry::fromArray($array['status']),
-            (isset($array['bot_info']) ? TdSchemaRegistry::fromArray($array['bot_info']) : null),
         );
     }
 
@@ -74,11 +67,10 @@ class ChatMember extends TdObject
     {
         return [
             '@type'            => static::TYPE_NAME,
-            'user_id'          => $this->userId,
+            'member_id'          => $this->userId,
             'inviter_user_id'  => $this->inviterUserId,
             'joined_chat_date' => $this->joinedChatDate,
             'status'           => $this->status->typeSerialize(),
-            'bot_info'         => (isset($this->botInfo) ? $this->botInfo : null),
         ];
     }
 
@@ -100,10 +92,5 @@ class ChatMember extends TdObject
     public function getStatus(): ChatMemberStatus
     {
         return $this->status;
-    }
-
-    public function getBotInfo(): ?BotInfo
-    {
-        return $this->botInfo;
     }
 }

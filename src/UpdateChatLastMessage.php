@@ -29,28 +29,20 @@ class UpdateChatLastMessage extends Update
      */
     protected ?Message $lastMessage;
 
-    /**
-     * New value of the chat order.
-     *
-     * @var string
-     */
-    protected string $order;
 
-    public function __construct(int $chatId, ?Message $lastMessage, string $order)
+    public function __construct(int $chatId, ?Message $lastMessage)
     {
         parent::__construct();
 
         $this->chatId      = $chatId;
         $this->lastMessage = $lastMessage;
-        $this->order       = $order;
     }
 
     public static function fromArray(array $array): UpdateChatLastMessage
     {
         return new static(
             $array['chat_id'],
-            (isset($array['last_message']) ? TdSchemaRegistry::fromArray($array['last_message']) : null),
-            $array['order'],
+            (isset($array['last_message']) ? TdSchemaRegistry::fromArray($array['last_message']) : null)
         );
     }
 
@@ -59,8 +51,7 @@ class UpdateChatLastMessage extends Update
         return [
             '@type'        => static::TYPE_NAME,
             'chat_id'      => $this->chatId,
-            'last_message' => (isset($this->lastMessage) ? $this->lastMessage : null),
-            'order'        => $this->order,
+            'last_message' => (isset($this->lastMessage) ? $this->lastMessage : null)
         ];
     }
 

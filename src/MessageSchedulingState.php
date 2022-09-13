@@ -26,6 +26,6 @@ class MessageSchedulingState extends TdObject
 
     public function typeSerialize(): array
     {
-        return ['@type' => static::TYPE_NAME];
+        return [null];
     }
 }

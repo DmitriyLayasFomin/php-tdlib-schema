@@ -39,11 +39,11 @@ class InputMessageVoiceNote extends InputMessageContent
     /**
      * Voice note caption; 0-GetOption("message_caption_length_max") characters.
      *
-     * @var FormattedText
+     * @var FormattedText|null
      */
-    protected FormattedText $caption;
+    protected FormattedText|null $caption;
 
-    public function __construct(InputFile $voiceNote, int $duration, string $waveform, FormattedText $caption)
+    public function __construct(InputFile $voiceNote, int $duration, string $waveform, FormattedText|null $caption)
     {
         parent::__construct();
 
@@ -70,7 +70,7 @@ class InputMessageVoiceNote extends InputMessageContent
             'voice_note' => $this->voiceNote->typeSerialize(),
             'duration'   => $this->duration,
             'waveform'   => $this->waveform,
-            'caption'    => $this->caption->typeSerialize(),
+            'caption'    => !empty($this->caption) ? $this->caption->typeSerialize() : null,
         ];
     }
 

@@ -18,11 +18,11 @@ class MessageChatChangePhoto extends MessageContent
     /**
      * New chat photo.
      *
-     * @var Photo
+     * @var Photo|null
      */
-    protected Photo $photo;
+    protected Photo|null $photo;
 
-    public function __construct(Photo $photo)
+    public function __construct(Photo|null $photo)
     {
         parent::__construct();
 
@@ -31,16 +31,19 @@ class MessageChatChangePhoto extends MessageContent
 
     public static function fromArray(array $array): MessageChatChangePhoto
     {
-        return new static(
-            TdSchemaRegistry::fromArray($array['photo']),
-        );
+        if ($array['photo']['@type'] != 'photo')
+            return new static(null);
+        else
+            return new static(
+                TdSchemaRegistry::fromArray($array['photo']),
+            );
     }
 
     public function typeSerialize(): array
     {
         return [
             '@type' => static::TYPE_NAME,
-            'photo' => $this->photo->typeSerialize(),
+            'photo' => !empty($this->photo) ? $this->photo->typeSerialize() : $this->photo,
         ];
     }
 

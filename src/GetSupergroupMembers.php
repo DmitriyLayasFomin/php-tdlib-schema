@@ -25,9 +25,9 @@ class GetSupergroupMembers extends TdFunction
     /**
      * The type of users to return. By default, supergroupMembersRecent.
      *
-     * @var SupergroupMembersFilter
+     * @var SupergroupMembersFilter|null
      */
-    protected SupergroupMembersFilter $filter;
+    protected SupergroupMembersFilter|null $filter;
 
     /**
      * Number of users to skip.
@@ -43,7 +43,7 @@ class GetSupergroupMembers extends TdFunction
      */
     protected int $limit;
 
-    public function __construct(int $supergroupId, SupergroupMembersFilter $filter, int $offset, int $limit)
+    public function __construct(int $supergroupId, SupergroupMembersFilter|null $filter, int $offset, int $limit)
     {
         $this->supergroupId = $supergroupId;
         $this->filter       = $filter;
@@ -66,7 +66,7 @@ class GetSupergroupMembers extends TdFunction
         return [
             '@type'         => static::TYPE_NAME,
             'supergroup_id' => $this->supergroupId,
-            'filter'        => $this->filter->typeSerialize(),
+            'filter'        => !empty($this->filter) ? $this->filter->typeSerialize() : $this->filter,
             'offset'        => $this->offset,
             'limit'         => $this->limit,
         ];

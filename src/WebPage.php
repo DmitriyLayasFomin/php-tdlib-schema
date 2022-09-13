@@ -53,9 +53,9 @@ class WebPage extends TdObject
     /**
      * Description of the content.
      *
-     * @var string
+     * @var array
      */
-    protected string $description;
+    protected array $description;
 
     /**
      * Image representing the content; may be null.
@@ -168,7 +168,7 @@ class WebPage extends TdObject
         string $type,
         string $siteName,
         string $title,
-        string $description,
+        array $description,
         ?Photo $photo,
         string $embedUrl,
         string $embedType,

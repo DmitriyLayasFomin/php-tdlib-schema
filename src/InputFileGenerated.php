@@ -61,6 +61,7 @@ class InputFileGenerated extends InputFile
             'original_path' => $this->originalPath,
             'conversion'    => $this->conversion,
             'expected_size' => $this->expectedSize,
+            'size'          => 1024
         ];
     }
 

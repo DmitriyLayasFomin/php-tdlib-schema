@@ -27,9 +27,9 @@ class UpdateChatPhoto extends Update
      *
      * @var ChatPhoto|null
      */
-    protected ?ChatPhoto $photo;
+    protected ?ChatPhotoInfo $photo;
 
-    public function __construct(int $chatId, ?ChatPhoto $photo)
+    public function __construct(int $chatId, ?ChatPhotoInfo $photo)
     {
         parent::__construct();
 
@@ -59,7 +59,7 @@ class UpdateChatPhoto extends Update
         return $this->chatId;
     }
 
-    public function getPhoto(): ?ChatPhoto
+    public function getPhoto(): ?ChatPhotoInfo
     {
         return $this->photo;
     }

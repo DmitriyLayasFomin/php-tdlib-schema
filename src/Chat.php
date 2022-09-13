@@ -48,7 +48,7 @@ class Chat extends TdObject
      *
      * @var ChatPhoto|null
      */
-    protected ?ChatPhoto $photo;
+    protected ?ChatPhotoInfo $photo;
 
     /**
      * Actions that non-administrator chat members are allowed to take in the chat.
@@ -202,13 +202,9 @@ class Chat extends TdObject
         ChatType $type,
         ?ChatList $chatList,
         string $title,
-        ?ChatPhoto $photo,
+        ?ChatPhotoInfo $photo,
         ChatPermissions $permissions,
         ?Message $lastMessage,
-        string $order,
-        bool $isPinned,
-        bool $isMarkedAsUnread,
-        bool $isSponsored,
         bool $hasScheduledMessages,
         bool $canBeDeletedOnlyForSelf,
         bool $canBeDeletedForAllUsers,
@@ -220,9 +216,7 @@ class Chat extends TdObject
         int $unreadMentionCount,
         ChatNotificationSettings $notificationSettings,
         ?ChatActionBar $actionBar,
-        int $pinnedMessageId,
         int $replyMarkupMessageId,
-        ?DraftMessage $draftMessage,
         string $clientData
     ) {
         $this->id                         = $id;
@@ -232,10 +226,6 @@ class Chat extends TdObject
         $this->photo                      = $photo;
         $this->permissions                = $permissions;
         $this->lastMessage                = $lastMessage;
-        $this->order                      = $order;
-        $this->isPinned                   = $isPinned;
-        $this->isMarkedAsUnread           = $isMarkedAsUnread;
-        $this->isSponsored                = $isSponsored;
         $this->hasScheduledMessages       = $hasScheduledMessages;
         $this->canBeDeletedOnlyForSelf    = $canBeDeletedOnlyForSelf;
         $this->canBeDeletedForAllUsers    = $canBeDeletedForAllUsers;
@@ -247,9 +237,7 @@ class Chat extends TdObject
         $this->unreadMentionCount         = $unreadMentionCount;
         $this->notificationSettings       = $notificationSettings;
         $this->actionBar                  = $actionBar;
-        $this->pinnedMessageId            = $pinnedMessageId;
         $this->replyMarkupMessageId       = $replyMarkupMessageId;
-        $this->draftMessage               = $draftMessage;
         $this->clientData                 = $clientData;
     }
 
@@ -263,10 +251,6 @@ class Chat extends TdObject
             (isset($array['photo']) ? TdSchemaRegistry::fromArray($array['photo']) : null),
             TdSchemaRegistry::fromArray($array['permissions']),
             (isset($array['last_message']) ? TdSchemaRegistry::fromArray($array['last_message']) : null),
-            $array['order'],
-            $array['is_pinned'],
-            $array['is_marked_as_unread'],
-            $array['is_sponsored'],
             $array['has_scheduled_messages'],
             $array['can_be_deleted_only_for_self'],
             $array['can_be_deleted_for_all_users'],
@@ -278,9 +262,7 @@ class Chat extends TdObject
             $array['unread_mention_count'],
             TdSchemaRegistry::fromArray($array['notification_settings']),
             (isset($array['action_bar']) ? TdSchemaRegistry::fromArray($array['action_bar']) : null),
-            $array['pinned_message_id'],
             $array['reply_markup_message_id'],
-            (isset($array['draft_message']) ? TdSchemaRegistry::fromArray($array['draft_message']) : null),
             $array['client_data'],
         );
     }
@@ -296,10 +278,6 @@ class Chat extends TdObject
             'photo'                        => (isset($this->photo) ? $this->photo : null),
             'permissions'                  => $this->permissions->typeSerialize(),
             'last_message'                 => (isset($this->lastMessage) ? $this->lastMessage : null),
-            'order'                        => $this->order,
-            'is_pinned'                    => $this->isPinned,
-            'is_marked_as_unread'          => $this->isMarkedAsUnread,
-            'is_sponsored'                 => $this->isSponsored,
             'has_scheduled_messages'       => $this->hasScheduledMessages,
             'can_be_deleted_only_for_self' => $this->canBeDeletedOnlyForSelf,
             'can_be_deleted_for_all_users' => $this->canBeDeletedForAllUsers,
@@ -311,7 +289,6 @@ class Chat extends TdObject
             'unread_mention_count'         => $this->unreadMentionCount,
             'notification_settings'        => $this->notificationSettings->typeSerialize(),
             'action_bar'                   => (isset($this->actionBar) ? $this->actionBar : null),
-            'pinned_message_id'            => $this->pinnedMessageId,
             'reply_markup_message_id'      => $this->replyMarkupMessageId,
             'draft_message'                => (isset($this->draftMessage) ? $this->draftMessage : null),
             'client_data'                  => $this->clientData,

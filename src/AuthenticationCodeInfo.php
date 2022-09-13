@@ -67,7 +67,7 @@ class AuthenticationCodeInfo extends TdObject
             '@type'        => static::TYPE_NAME,
             'phone_number' => $this->phoneNumber,
             'type'         => $this->type->typeSerialize(),
-            'next_type'    => (isset($this->nextType) ? $this->nextType : null),
+            'next_type'    => (isset($this->nextType) ? $this->nextType->typeSerialize() : null),
             'timeout'      => $this->timeout,
         ];
     }

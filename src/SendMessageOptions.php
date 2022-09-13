@@ -13,7 +13,7 @@ namespace AurimasNiekis\TdLibSchema;
  */
 class SendMessageOptions extends TdObject
 {
-    public const TYPE_NAME = 'sendMessageOptions';
+    public const TYPE_NAME = 'messageSendOptions';
 
     /**
      * Pass true to disable notification for the message. Must be false if the message is sent to a secret chat.
@@ -32,11 +32,11 @@ class SendMessageOptions extends TdObject
     /**
      * Message scheduling state. Messages sent to a secret chat, live location messages and self-destructing messages can't be scheduled.
      *
-     * @var MessageSchedulingState
+     * @var MessageSchedulingState|null
      */
-    protected MessageSchedulingState $schedulingState;
+    protected MessageSchedulingState|null $schedulingState;
 
-    public function __construct(bool $disableNotification, bool $fromBackground, MessageSchedulingState $schedulingState)
+    public function __construct(bool $disableNotification, bool $fromBackground, MessageSchedulingState|null $schedulingState)
     {
         $this->disableNotification = $disableNotification;
         $this->fromBackground      = $fromBackground;
@@ -58,7 +58,7 @@ class SendMessageOptions extends TdObject
             '@type'                => static::TYPE_NAME,
             'disable_notification' => $this->disableNotification,
             'from_background'      => $this->fromBackground,
-            'scheduling_state'     => $this->schedulingState->typeSerialize(),
+            'scheduling_state'     => !empty($this->schedulingState) ? $this->schedulingState->typeSerialize() : null,
         ];
     }
 

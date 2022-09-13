@@ -46,16 +46,16 @@ class UserFullInfo extends TdObject
     /**
      * A short user bio.
      *
-     * @var string
+     * @var string|array|null
      */
-    protected string $bio;
+    protected string|array|null $bio;
 
     /**
      * For bots, the text that is included with the link when users share the bot.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $shareText;
+    protected string|null $shareText;
 
     /**
      * Number of group chats where both the other user and the current user are a member; 0 for the current user.
@@ -76,8 +76,8 @@ class UserFullInfo extends TdObject
         bool $canBeCalled,
         bool $hasPrivateCalls,
         bool $needPhoneNumberPrivacyException,
-        string $bio,
-        string $shareText,
+        string|array|null $bio,
+        string|null $shareText,
         int $groupInCommonCount,
         ?BotInfo $botInfo
     ) {

@@ -77,6 +77,7 @@ class TdSchemaRegistry
         'poll'                                            => Poll::class,
         'profilePhoto'                                    => ProfilePhoto::class,
         'chatPhoto'                                       => ChatPhoto::class,
+        'chatPhotoInfo'                                   => ChatPhotoInfo::class,
         'UserType'                                        => UserType::class,
         'userTypeRegular'                                 => UserTypeRegular::class,
         'userTypeDeleted'                                 => UserTypeDeleted::class,

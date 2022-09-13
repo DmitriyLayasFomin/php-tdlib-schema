@@ -121,37 +121,46 @@ class TdlibParameters extends TdObject
     protected bool $ignoreFileNames;
 
     public function __construct(
-        bool $useTestDc,
+        bool   $useTestDc,
         string $databaseDirectory,
         string $filesDirectory,
-        bool $useFileDatabase,
-        bool $useChatInfoDatabase,
-        bool $useMessageDatabase,
-        bool $useSecretChats,
-        int $apiId,
+        bool   $useFileDatabase,
+        bool   $useChatInfoDatabase,
+        bool   $useMessageDatabase,
+        bool   $useSecretChats,
+        int    $apiId,
         string $apiHash,
         string $systemLanguageCode,
         string $deviceModel,
         string $systemVersion,
         string $applicationVersion,
-        bool $enableStorageOptimizer,
-        bool $ignoreFileNames
-    ) {
-        $this->useTestDc              = $useTestDc;
-        $this->databaseDirectory      = $databaseDirectory;
-        $this->filesDirectory         = $filesDirectory;
-        $this->useFileDatabase        = $useFileDatabase;
-        $this->useChatInfoDatabase    = $useChatInfoDatabase;
-        $this->useMessageDatabase     = $useMessageDatabase;
-        $this->useSecretChats         = $useSecretChats;
-        $this->apiId                  = $apiId;
-        $this->apiHash                = $apiHash;
-        $this->systemLanguageCode     = $systemLanguageCode;
-        $this->deviceModel            = $deviceModel;
-        $this->systemVersion          = $systemVersion;
-        $this->applicationVersion     = $applicationVersion;
+        bool   $enableStorageOptimizer,
+        bool   $ignoreFileNames,
+        string $version,
+        bool $test,
+        bool $online,
+        bool $ignore_background_updates
+    )
+    {
+        $this->useTestDc = $useTestDc;
+        $this->databaseDirectory = $databaseDirectory;
+        $this->filesDirectory = $filesDirectory;
+        $this->useFileDatabase = $useFileDatabase;
+        $this->useChatInfoDatabase = $useChatInfoDatabase;
+        $this->useMessageDatabase = $useMessageDatabase;
+        $this->useSecretChats = $useSecretChats;
+        $this->apiId = $apiId;
+        $this->apiHash = $apiHash;
+        $this->systemLanguageCode = $systemLanguageCode;
+        $this->deviceModel = $deviceModel;
+        $this->systemVersion = $systemVersion;
+        $this->applicationVersion = $applicationVersion;
         $this->enableStorageOptimizer = $enableStorageOptimizer;
-        $this->ignoreFileNames        = $ignoreFileNames;
+        $this->ignoreFileNames = $ignoreFileNames;
+        $this->version = $version;
+        $this->test = $test;
+        $this->online = $online;
+        $this->ignore_background_updates = $ignore_background_updates;
     }
 
     public static function fromArray(array $array): TdlibParameters
@@ -172,28 +181,36 @@ class TdlibParameters extends TdObject
             $array['application_version'],
             $array['enable_storage_optimizer'],
             $array['ignore_file_names'],
+            $array['version'],
+            $array['test_mode'],
+            $array['online'],
+            $array['ignore_background_updates'],
         );
     }
 
     public function typeSerialize(): array
     {
         return [
-            '@type'                    => static::TYPE_NAME,
-            'use_test_dc'              => $this->useTestDc,
-            'database_directory'       => $this->databaseDirectory,
-            'files_directory'          => $this->filesDirectory,
-            'use_file_database'        => $this->useFileDatabase,
-            'use_chat_info_database'   => $this->useChatInfoDatabase,
-            'use_message_database'     => $this->useMessageDatabase,
-            'use_secret_chats'         => $this->useSecretChats,
-            'api_id'                   => $this->apiId,
-            'api_hash'                 => $this->apiHash,
-            'system_language_code'     => $this->systemLanguageCode,
-            'device_model'             => $this->deviceModel,
-            'system_version'           => $this->systemVersion,
-            'application_version'      => $this->applicationVersion,
+            '@type' => static::TYPE_NAME,
+            'use_test_dc' => $this->useTestDc,
+            'database_directory' => $this->databaseDirectory,
+            'files_directory' => $this->filesDirectory,
+            'use_file_database' => $this->useFileDatabase,
+            'use_chat_info_database' => $this->useChatInfoDatabase,
+            'use_message_database' => $this->useMessageDatabase,
+            'use_secret_chats' => $this->useSecretChats,
+            'api_id' => $this->apiId,
+            'api_hash' => $this->apiHash,
+            'system_language_code' => $this->systemLanguageCode,
+            'device_model' => $this->deviceModel,
+            'system_version' => $this->systemVersion,
+            'application_version' => $this->applicationVersion,
             'enable_storage_optimizer' => $this->enableStorageOptimizer,
-            'ignore_file_names'        => $this->ignoreFileNames,
+            'ignore_file_names' => $this->ignoreFileNames,
+            'version' => $this->version,
+            'test_mode' => $this->test,
+            'online' => $this->online,
+            'ignore_background_updates' => $this->ignore_background_updates
         ];
     }
 

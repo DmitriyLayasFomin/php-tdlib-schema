@@ -27,7 +27,7 @@ class ScopeNotificationSettings extends TdObject
      *
      * @var string
      */
-    protected string $sound;
+    protected string|null $sound;
 
     /**
      * True, if message content should be displayed in notifications.
@@ -46,16 +46,16 @@ class ScopeNotificationSettings extends TdObject
     /**
      * True, if notifications for messages with mentions will be created as for an ordinary unread message.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $disableMentionNotifications;
+    protected bool|null $disableMentionNotifications;
 
     public function __construct(
         int $muteFor,
-        string $sound,
+        string|null $sound,
         bool $showPreview,
         bool $disablePinnedMessageNotifications,
-        bool $disableMentionNotifications
+        bool|null $disableMentionNotifications
     ) {
         $this->muteFor                           = $muteFor;
         $this->sound                             = $sound;
@@ -71,7 +71,7 @@ class ScopeNotificationSettings extends TdObject
             $array['sound'],
             $array['show_preview'],
             $array['disable_pinned_message_notifications'],
-            $array['disable_mention_notifications'],
+            @$array['disable_mention_notifications'],
         );
     }
 

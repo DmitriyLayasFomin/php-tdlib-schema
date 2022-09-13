@@ -39,9 +39,9 @@ class SendMessage extends TdFunction
     /**
      * Markup for replying to the message; for bots only.
      *
-     * @var ReplyMarkup
+     * @var ReplyMarkup|null
      */
-    protected ReplyMarkup $replyMarkup;
+    protected ReplyMarkup|null $replyMarkup;
 
     /**
      * The content of the message to be sent.
@@ -51,16 +51,17 @@ class SendMessage extends TdFunction
     protected InputMessageContent $inputMessageContent;
 
     public function __construct(
-        int $chatId,
-        int $replyToMessageId,
-        SendMessageOptions $options,
-        ReplyMarkup $replyMarkup,
+        int                 $chatId,
+        int                 $replyToMessageId,
+        SendMessageOptions  $options,
+        ReplyMarkup|null         $replyMarkup = null,
         InputMessageContent $inputMessageContent
-    ) {
-        $this->chatId              = $chatId;
-        $this->replyToMessageId    = $replyToMessageId;
-        $this->options             = $options;
-        $this->replyMarkup         = $replyMarkup;
+    )
+    {
+        $this->chatId = $chatId;
+        $this->replyToMessageId = $replyToMessageId;
+        $this->options = $options;
+        $this->replyMarkup = $replyMarkup;
         $this->inputMessageContent = $inputMessageContent;
     }
 
@@ -78,11 +79,13 @@ class SendMessage extends TdFunction
     public function typeSerialize(): array
     {
         return [
-            '@type'                 => static::TYPE_NAME,
-            'chat_id'               => $this->chatId,
-            'reply_to_message_id'   => $this->replyToMessageId,
-            'options'               => $this->options->typeSerialize(),
-            'reply_markup'          => $this->replyMarkup->typeSerialize(),
+            '@type' => static::TYPE_NAME,
+            'chat_id' => $this->chatId,
+            'reply_to_message_id' => $this->replyToMessageId,
+            'options' => $this->options->typeSerialize(),
+            'reply_markup' => !empty($this->replyMarkup) ?
+                $this->replyMarkup->typeSerialize() :
+                $this->replyMarkup,
             'input_message_content' => $this->inputMessageContent->typeSerialize(),
         ];
     }

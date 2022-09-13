@@ -89,7 +89,6 @@ class ChatNotificationSettings extends TdObject
         bool $useDefaultMuteFor,
         int $muteFor,
         bool $useDefaultSound,
-        string $sound,
         bool $useDefaultShowPreview,
         bool $showPreview,
         bool $useDefaultDisablePinnedMessageNotifications,
@@ -100,7 +99,6 @@ class ChatNotificationSettings extends TdObject
         $this->useDefaultMuteFor                           = $useDefaultMuteFor;
         $this->muteFor                                     = $muteFor;
         $this->useDefaultSound                             = $useDefaultSound;
-        $this->sound                                       = $sound;
         $this->useDefaultShowPreview                       = $useDefaultShowPreview;
         $this->showPreview                                 = $showPreview;
         $this->useDefaultDisablePinnedMessageNotifications = $useDefaultDisablePinnedMessageNotifications;
@@ -115,7 +113,6 @@ class ChatNotificationSettings extends TdObject
             $array['use_default_mute_for'],
             $array['mute_for'],
             $array['use_default_sound'],
-            $array['sound'],
             $array['use_default_show_preview'],
             $array['show_preview'],
             $array['use_default_disable_pinned_message_notifications'],
@@ -132,7 +129,6 @@ class ChatNotificationSettings extends TdObject
             'use_default_mute_for'                             => $this->useDefaultMuteFor,
             'mute_for'                                         => $this->muteFor,
             'use_default_sound'                                => $this->useDefaultSound,
-            'sound'                                            => $this->sound,
             'use_default_show_preview'                         => $this->useDefaultShowPreview,
             'show_preview'                                     => $this->showPreview,
             'use_default_disable_pinned_message_notifications' => $this->useDefaultDisablePinnedMessageNotifications,
@@ -155,11 +151,6 @@ class ChatNotificationSettings extends TdObject
     public function getUseDefaultSound(): bool
     {
         return $this->useDefaultSound;
-    }
-
-    public function getSound(): string
-    {
-        return $this->sound;
     }
 
     public function getUseDefaultShowPreview(): bool

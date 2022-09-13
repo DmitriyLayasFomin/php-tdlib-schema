@@ -25,11 +25,11 @@ class FinishFileGeneration extends TdFunction
     /**
      * If set, means that file generation has failed and should be terminated.
      *
-     * @var Error
+     * @var Error|null
      */
-    protected Error $error;
+    protected Error|null $error;
 
-    public function __construct(string $generationId, Error $error)
+    public function __construct(string $generationId, Error|null $error)
     {
         $this->generationId = $generationId;
         $this->error        = $error;
@@ -39,7 +39,7 @@ class FinishFileGeneration extends TdFunction
     {
         return new static(
             $array['generation_id'],
-            TdSchemaRegistry::fromArray($array['error']),
+            !empty(@$array['error']) ? TdSchemaRegistry::fromArray($array['error']) : null,
         );
     }
 
@@ -48,7 +48,7 @@ class FinishFileGeneration extends TdFunction
         return [
             '@type'         => static::TYPE_NAME,
             'generation_id' => $this->generationId,
-            'error'         => $this->error->typeSerialize(),
+            'error'         => !empty($this->error) ? $this->error->typeSerialize() : null,
         ];
     }
 

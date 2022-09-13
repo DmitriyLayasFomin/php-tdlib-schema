@@ -27,7 +27,7 @@ class UploadFile extends TdFunction
      *
      * @var FileType
      */
-    protected FileType $fileType;
+    protected FileType|null $fileType;
 
     /**
      * Priority of the upload (1-32). The higher the priority, the earlier the file will be uploaded. If the priorities of two files are equal, then the first one for which uploadFile was called will be uploaded first.
@@ -36,7 +36,7 @@ class UploadFile extends TdFunction
      */
     protected int $priority;
 
-    public function __construct(InputFile $file, FileType $fileType, int $priority)
+    public function __construct(InputFile $file, FileType|null $fileType, int $priority)
     {
         $this->file     = $file;
         $this->fileType = $fileType;
@@ -57,7 +57,7 @@ class UploadFile extends TdFunction
         return [
             '@type'     => static::TYPE_NAME,
             'file'      => $this->file->typeSerialize(),
-            'file_type' => $this->fileType->typeSerialize(),
+            'file_type' => !empty($this->fileType) ? $this->fileType->typeSerialize() : null,
             'priority'  => $this->priority,
         ];
     }

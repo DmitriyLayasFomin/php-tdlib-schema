@@ -25,77 +25,77 @@ class ChatMemberStatusAdministrator extends ChatMemberStatus
     /**
      * True, if the current user can edit the administrator privileges for the called user.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canBeEdited;
+    protected bool|null $canBeEdited;
 
     /**
      * True, if the administrator can change the chat title, photo, and other settings.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canChangeInfo;
+    protected bool|null $canChangeInfo;
 
     /**
      * True, if the administrator can create channel posts; applicable to channels only.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canPostMessages;
+    protected bool|null $canPostMessages;
 
     /**
      * True, if the administrator can edit messages of other users and pin messages; applicable to channels only.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canEditMessages;
+    protected bool|null $canEditMessages;
 
     /**
      * True, if the administrator can delete messages of other users.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canDeleteMessages;
+    protected bool|null $canDeleteMessages;
 
     /**
      * True, if the administrator can invite new users to the chat.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canInviteUsers;
+    protected bool|null $canInviteUsers;
 
     /**
      * True, if the administrator can restrict, ban, or unban chat members.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canRestrictMembers;
+    protected bool|null $canRestrictMembers;
 
     /**
      * True, if the administrator can pin messages; applicable to groups only.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canPinMessages;
+    protected bool|null $canPinMessages;
 
     /**
      * True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that were directly or indirectly promoted by them.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected bool $canPromoteMembers;
+    protected bool|null $canPromoteMembers;
 
     public function __construct(
         string $customTitle,
-        bool $canBeEdited,
-        bool $canChangeInfo,
-        bool $canPostMessages,
-        bool $canEditMessages,
-        bool $canDeleteMessages,
-        bool $canInviteUsers,
-        bool $canRestrictMembers,
-        bool $canPinMessages,
-        bool $canPromoteMembers
+        bool|null $canBeEdited,
+        bool|null $canChangeInfo,
+        bool|null $canPostMessages,
+        bool|null $canEditMessages,
+        bool|null $canDeleteMessages,
+        bool|null $canInviteUsers,
+        bool|null $canRestrictMembers,
+        bool|null $canPinMessages,
+        bool|null $canPromoteMembers
     ) {
         parent::__construct();
 

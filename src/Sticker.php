@@ -53,9 +53,9 @@ class Sticker extends TdObject
     /**
      * True, if the sticker is a mask.
      *
-     * @var bool
+     * @var mixed
      */
-    protected bool $isMask;
+    protected mixed $isMask;
 
     /**
      * Position where the mask should be placed; may be null.
@@ -83,8 +83,7 @@ class Sticker extends TdObject
         int $width,
         int $height,
         string $emoji,
-        bool $isAnimated,
-        bool $isMask,
+        mixed $isMask = null,
         ?MaskPosition $maskPosition,
         ?PhotoSize $thumbnail,
         File $sticker
@@ -93,7 +92,6 @@ class Sticker extends TdObject
         $this->width        = $width;
         $this->height       = $height;
         $this->emoji        = $emoji;
-        $this->isAnimated   = $isAnimated;
         $this->isMask       = $isMask;
         $this->maskPosition = $maskPosition;
         $this->thumbnail    = $thumbnail;
@@ -107,8 +105,7 @@ class Sticker extends TdObject
             $array['width'],
             $array['height'],
             $array['emoji'],
-            $array['is_animated'],
-            $array['is_mask'],
+            $array['is_mask'] ?? null,
             (isset($array['mask_position']) ? TdSchemaRegistry::fromArray($array['mask_position']) : null),
             (isset($array['thumbnail']) ? TdSchemaRegistry::fromArray($array['thumbnail']) : null),
             TdSchemaRegistry::fromArray($array['sticker']),
@@ -123,7 +120,6 @@ class Sticker extends TdObject
             'width'         => $this->width,
             'height'        => $this->height,
             'emoji'         => $this->emoji,
-            'is_animated'   => $this->isAnimated,
             'is_mask'       => $this->isMask,
             'mask_position' => (isset($this->maskPosition) ? $this->maskPosition : null),
             'thumbnail'     => (isset($this->thumbnail) ? $this->thumbnail : null),

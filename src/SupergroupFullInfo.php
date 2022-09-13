@@ -130,9 +130,9 @@ class SupergroupFullInfo extends TdObject
     /**
      * Invite link for this chat.
      *
-     * @var string
+     * @var mixed
      */
-    protected string $inviteLink;
+    protected mixed $inviteLink;
 
     /**
      * Identifier of the basic group from which supergroup was upgraded; 0 if none.
@@ -161,11 +161,10 @@ class SupergroupFullInfo extends TdObject
         bool $canSetUsername,
         bool $canSetStickerSet,
         bool $canSetLocation,
-        bool $canViewStatistics,
         bool $isAllHistoryAvailable,
         string $stickerSetId,
         ?ChatLocation $location,
-        string $inviteLink,
+        mixed $inviteLink = null,
         int $upgradedFromBasicGroupId,
         int $upgradedFromMaxMessageId
     ) {
@@ -181,7 +180,6 @@ class SupergroupFullInfo extends TdObject
         $this->canSetUsername           = $canSetUsername;
         $this->canSetStickerSet         = $canSetStickerSet;
         $this->canSetLocation           = $canSetLocation;
-        $this->canViewStatistics        = $canViewStatistics;
         $this->isAllHistoryAvailable    = $isAllHistoryAvailable;
         $this->stickerSetId             = $stickerSetId;
         $this->location                 = $location;
@@ -205,11 +203,10 @@ class SupergroupFullInfo extends TdObject
             $array['can_set_username'],
             $array['can_set_sticker_set'],
             $array['can_set_location'],
-            $array['can_view_statistics'],
             $array['is_all_history_available'],
             $array['sticker_set_id'],
             (isset($array['location']) ? TdSchemaRegistry::fromArray($array['location']) : null),
-            $array['invite_link'],
+            $array['invite_link'] ?? null,
             $array['upgraded_from_basic_group_id'],
             $array['upgraded_from_max_message_id'],
         );
@@ -231,7 +228,6 @@ class SupergroupFullInfo extends TdObject
             'can_set_username'             => $this->canSetUsername,
             'can_set_sticker_set'          => $this->canSetStickerSet,
             'can_set_location'             => $this->canSetLocation,
-            'can_view_statistics'          => $this->canViewStatistics,
             'is_all_history_available'     => $this->isAllHistoryAvailable,
             'sticker_set_id'               => $this->stickerSetId,
             'location'                     => (isset($this->location) ? $this->location : null),

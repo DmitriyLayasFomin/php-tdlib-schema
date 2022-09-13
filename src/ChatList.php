@@ -13,7 +13,7 @@ namespace AurimasNiekis\TdLibSchema;
  */
 class ChatList extends TdObject
 {
-    public const TYPE_NAME = 'ChatList';
+    public const TYPE_NAME = 'chatList';
 
     public function __construct()
     {

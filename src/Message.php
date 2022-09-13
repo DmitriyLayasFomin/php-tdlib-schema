@@ -192,7 +192,6 @@ class Message extends TdObject
 
     public function __construct(
         int $id,
-        int $senderUserId,
         int $chatId,
         ?MessageSendingState $sendingState,
         ?MessageSchedulingState $schedulingState,
@@ -211,14 +210,12 @@ class Message extends TdObject
         float $ttlExpiresIn,
         int $viaBotUserId,
         string $authorSignature,
-        int $views,
         string $mediaAlbumId,
         string $restrictionReason,
         MessageContent $content,
         ?ReplyMarkup $replyMarkup
     ) {
         $this->id                      = $id;
-        $this->senderUserId            = $senderUserId;
         $this->chatId                  = $chatId;
         $this->sendingState            = $sendingState;
         $this->schedulingState         = $schedulingState;
@@ -237,7 +234,6 @@ class Message extends TdObject
         $this->ttlExpiresIn            = $ttlExpiresIn;
         $this->viaBotUserId            = $viaBotUserId;
         $this->authorSignature         = $authorSignature;
-        $this->views                   = $views;
         $this->mediaAlbumId            = $mediaAlbumId;
         $this->restrictionReason       = $restrictionReason;
         $this->content                 = $content;
@@ -248,7 +244,6 @@ class Message extends TdObject
     {
         return new static(
             $array['id'],
-            $array['sender_user_id'],
             $array['chat_id'],
             (isset($array['sending_state']) ? TdSchemaRegistry::fromArray($array['sending_state']) : null),
             (isset($array['scheduling_state']) ? TdSchemaRegistry::fromArray($array['scheduling_state']) : null),
@@ -267,7 +262,6 @@ class Message extends TdObject
             $array['ttl_expires_in'],
             $array['via_bot_user_id'],
             $array['author_signature'],
-            $array['views'],
             $array['media_album_id'],
             $array['restriction_reason'],
             TdSchemaRegistry::fromArray($array['content']),
@@ -280,7 +274,6 @@ class Message extends TdObject
         return [
             '@type'                        => static::TYPE_NAME,
             'id'                           => $this->id,
-            'sender_user_id'               => $this->senderUserId,
             'chat_id'                      => $this->chatId,
             'sending_state'                => (isset($this->sendingState) ? $this->sendingState : null),
             'scheduling_state'             => (isset($this->schedulingState) ? $this->schedulingState : null),
@@ -299,7 +292,6 @@ class Message extends TdObject
             'ttl_expires_in'               => $this->ttlExpiresIn,
             'via_bot_user_id'              => $this->viaBotUserId,
             'author_signature'             => $this->authorSignature,
-            'views'                        => $this->views,
             'media_album_id'               => $this->mediaAlbumId,
             'restriction_reason'           => $this->restrictionReason,
             'content'                      => $this->content->typeSerialize(),
