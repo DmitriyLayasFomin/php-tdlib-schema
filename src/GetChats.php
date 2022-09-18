@@ -27,7 +27,7 @@ class GetChats extends TdFunction
      *
      * @var string
      */
-    protected string $offsetOrder;
+    protected string|null $offsetOrder;
 
     /**
      * Chat identifier to return chats from.
@@ -43,7 +43,7 @@ class GetChats extends TdFunction
      */
     protected int $limit;
 
-    public function __construct(ChatList $chatList, string $offsetOrder, int $offsetChatId, int $limit)
+    public function __construct(ChatList $chatList, string|null $offsetOrder, int $offsetChatId, int $limit)
     {
         $this->chatList     = $chatList;
         $this->offsetOrder  = $offsetOrder;
@@ -77,7 +77,7 @@ class GetChats extends TdFunction
         return $this->chatList;
     }
 
-    public function getOffsetOrder(): string
+    public function getOffsetOrder(): string|null
     {
         return $this->offsetOrder;
     }

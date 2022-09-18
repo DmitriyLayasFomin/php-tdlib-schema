@@ -9,11 +9,13 @@ declare(strict_types=1);
 namespace AurimasNiekis\TdLibSchema;
 
 /**
- * Photo description.
+ * Represents a part of the text that needs to be formatted in some unusual way.
  */
-class PhotoSize extends TdObject
+class Thumbnail extends PhotoSize
 {
-    public const TYPE_NAME = 'photoSize';
+    public const TYPE_NAME = 'thumbnail';
+
+
 
     /**
      * Thumbnail type (see https://core.telegram.org/constructor/photoSize).
@@ -32,7 +34,7 @@ class PhotoSize extends TdObject
     /**
      * Photo width.
      *
-     * @var int|null
+     * @var int
      */
     protected int|null $width;
 
@@ -55,7 +57,7 @@ class PhotoSize extends TdObject
     {
         return new static(
             $array['type'],
-            TdSchemaRegistry::fromArray($array['photo']),
+            null,
             $array['width'],
             $array['height'],
         );
@@ -91,4 +93,5 @@ class PhotoSize extends TdObject
     {
         return $this->height;
     }
+
 }

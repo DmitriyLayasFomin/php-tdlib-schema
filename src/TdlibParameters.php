@@ -119,6 +119,13 @@ class TdlibParameters extends TdObject
      * @var bool
      */
     protected bool $ignoreFileNames;
+    protected string $version;
+    protected bool $test;
+    protected bool $online;
+    protected bool $ignore_background_updates;
+    protected bool $disable_sent_scheduled_message_notifications;
+    protected bool $disable_time_adjustment_protection;
+    protected int $my_id;
 
     public function __construct(
         bool   $useTestDc,
@@ -139,7 +146,10 @@ class TdlibParameters extends TdObject
         string $version,
         bool $test,
         bool $online,
-        bool $ignore_background_updates
+        bool $ignore_background_updates,
+        bool $disable_sent_scheduled_message_notifications,
+        bool $disable_time_adjustment_protection,
+        int $my_id
     )
     {
         $this->useTestDc = $useTestDc;
@@ -161,6 +171,9 @@ class TdlibParameters extends TdObject
         $this->test = $test;
         $this->online = $online;
         $this->ignore_background_updates = $ignore_background_updates;
+        $this->disable_sent_scheduled_message_notifications = $disable_sent_scheduled_message_notifications;
+        $this->disable_time_adjustment_protection = $disable_time_adjustment_protection;
+        $this->my_id = $my_id;
     }
 
     public static function fromArray(array $array): TdlibParameters
@@ -185,6 +198,9 @@ class TdlibParameters extends TdObject
             $array['test_mode'],
             $array['online'],
             $array['ignore_background_updates'],
+            $array['disable_sent_scheduled_message_notifications'],
+            $array['disable_time_adjustment_protection'],
+            $array['my_id'],
         );
     }
 
@@ -210,7 +226,10 @@ class TdlibParameters extends TdObject
             'version' => $this->version,
             'test_mode' => $this->test,
             'online' => $this->online,
-            'ignore_background_updates' => $this->ignore_background_updates
+            'ignore_background_updates' => $this->ignore_background_updates,
+            'disable_sent_scheduled_message_notifications' => $this->disable_sent_scheduled_message_notifications,
+            'disable_time_adjustment_protection' => $this->disable_time_adjustment_protection,
+            'my_id' => $this->my_id,
         ];
     }
 

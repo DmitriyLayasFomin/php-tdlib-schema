@@ -32,11 +32,11 @@ class UpdateChatDraftMessage extends Update
     /**
      * New value of the chat order.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $order;
+    protected string|null $order;
 
-    public function __construct(int $chatId, ?DraftMessage $draftMessage, string $order)
+    public function __construct(int $chatId, ?DraftMessage $draftMessage, string|null $order)
     {
         parent::__construct();
 
@@ -74,7 +74,7 @@ class UpdateChatDraftMessage extends Update
         return $this->draftMessage;
     }
 
-    public function getOrder(): string
+    public function getOrder(): string|null
     {
         return $this->order;
     }

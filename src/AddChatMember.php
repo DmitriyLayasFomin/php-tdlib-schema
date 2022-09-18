@@ -32,11 +32,11 @@ class AddChatMember extends TdFunction
     /**
      * The number of earlier messages from the chat to be forwarded to the new member; up to 100. Ignored for supergroups and channels.
      *
-     * @var int
+     * @var int|null
      */
-    protected int $forwardLimit;
+    protected int|null $forwardLimit;
 
-    public function __construct(int $chatId, int $userId, int $forwardLimit)
+    public function __construct(int $chatId, int $userId, int|null $forwardLimit)
     {
         $this->chatId       = $chatId;
         $this->userId       = $userId;

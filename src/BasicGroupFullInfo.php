@@ -39,11 +39,11 @@ class BasicGroupFullInfo extends TdObject
     /**
      * Invite link for this group; available only after it has been generated at least once and only for the group creator.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $inviteLink;
+    protected string|null $inviteLink;
 
-    public function __construct(string $description, int $creatorUserId, array $members, string $inviteLink)
+    public function __construct(string $description, int $creatorUserId, array $members, string|null $inviteLink)
     {
         $this->description   = $description;
         $this->creatorUserId = $creatorUserId;

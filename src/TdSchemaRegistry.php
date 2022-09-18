@@ -753,6 +753,7 @@ class TdSchemaRegistry
         'tMeUrls'                                         => TMeUrls::class,
         'count'                                           => Count::class,
         'text'                                            => Text::class,
+        'thumbnail'                                       => Thumbnail::class,
         'seconds'                                         => Seconds::class,
         'deepLinkInfo'                                    => DeepLinkInfo::class,
         'TextParseMode'                                   => TextParseMode::class,
